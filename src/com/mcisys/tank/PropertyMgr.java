@@ -16,8 +16,8 @@ public class PropertyMgr {
         }
     }
 
-    public static Object get(String key) {
-        if (props == null) return null;
-        return props.get(key);
+    public static int get(String key) {
+        if (props == null) return 0;
+        return Integer.parseInt(String.valueOf(props.get(key)));
     }
 }

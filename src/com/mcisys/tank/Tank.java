@@ -16,7 +16,7 @@ public class Tank {
 
     Rectangle rect = new Rectangle();
 
-    private static final int SPEED = 3;
+    private static final int SPEED = PropertyMgr.get("tankSpeed");
 
     private boolean moving = true;
     private boolean living = true;
