@@ -15,6 +15,8 @@ public class TankFrame extends Frame {
     Tank myTank = new Tank(200, 500, Dir.UP, this, Group.GOOD);
     List<Bullet> bulletList = new ArrayList<>();
     List<Tank> tanks = new ArrayList<>();
+    List<Explode> explodeList = new ArrayList<>();
+
     public static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
 
     public TankFrame() {
@@ -62,6 +64,11 @@ public class TankFrame extends Frame {
             tanks.get(i).paint(g);
         }
 
+        for (int i = 0; i < explodeList.size(); i++) {
+            explodeList.get(i).paint(g);
+        }
+
+        //碰撞检测
         for (int i = 0; i < bulletList.size(); i++) {
             for (int j = 0; j < tanks.size(); j++) {
                 bulletList.get(i).collideWith(tanks.get(j));
