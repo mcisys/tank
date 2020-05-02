@@ -12,7 +12,7 @@ public class TankFrame extends Frame {
 
     private Image offScreenImage = null;
 
-    Tank myTank = new Tank(200, 500, Dir.UP, this);
+    Tank myTank = new Tank(200, 500, Dir.UP, this, Group.GOOD);
     List<Bullet> bulletList = new ArrayList<>();
     List<Tank> tanks = new ArrayList<>();
     public static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
@@ -66,6 +66,7 @@ public class TankFrame extends Frame {
             for (int j = 0; j < tanks.size(); j++) {
                 bulletList.get(i).collideWith(tanks.get(j));
             }
+            bulletList.get(i).collideWith(myTank);
         }
     }
 
