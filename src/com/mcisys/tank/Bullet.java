@@ -1,11 +1,8 @@
 package com.mcisys.tank;
 
-import com.mcisys.tank.abstractfactory.BaseBullet;
-import com.mcisys.tank.abstractfactory.BaseTank;
-
 import java.awt.*;
 
-public class Bullet extends BaseBullet {
+public class Bullet {
 
     private static final int SPEED = PropertyMgr.get("bulletSpeed");
     public static final int WIDTH = ResourceMgr.bulletD.getWidth();
@@ -84,14 +81,14 @@ public class Bullet extends BaseBullet {
         if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) living = false;
     }
 
-    public void collideWith(BaseTank tank) {
+    public void collideWith(Tank tank) {
         if (this.group == tank.getGroup()) return;
         if (this.rect.intersects(tank.rect)) {
             tank.die();
             this.die();
             int ex = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
             int ey = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-            tf.explodeList.add(tf.gf.createExplode(ex, ey, tf));
+            tf.explodeList.add(new Explode(ex, ey, tf));
         }
     }
 

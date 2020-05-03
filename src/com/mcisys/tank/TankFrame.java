@@ -1,7 +1,5 @@
 package com.mcisys.tank;
 
-import com.mcisys.tank.abstractfactory.*;
-
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -15,14 +13,12 @@ public class TankFrame extends Frame {
     private Image offScreenImage = null;
 
     Tank myTank = new Tank(200, 500, Dir.UP, this, Group.GOOD);
-    public List<BaseBullet> bulletList = new ArrayList<>();
-    public List<BaseTank> tanks = new ArrayList<>();
-    public List<BaseExplode> explodeList = new ArrayList<>();
+    List<Bullet> bulletList = new ArrayList<>();
+    List<Tank> tanks = new ArrayList<>();
+    List<Explode> explodeList = new ArrayList<>();
 
     public static final int GAME_WIDTH = PropertyMgr.get("tankFrameWidth");
     public static final int GAME_HEIGHT = PropertyMgr.get("tankFrameHeight");
-
-    public GameFactory gf = new DefaultFactory();
 
     public TankFrame() {
         setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -129,7 +125,7 @@ public class TankFrame extends Frame {
                     bd = false;
                     break;
                 case KeyEvent.VK_CONTROL:
-                    myTank.fire();
+                    myTank.fire(FourDirFireStrategy.getInstance());
                     break;
                 default:
                     break;
