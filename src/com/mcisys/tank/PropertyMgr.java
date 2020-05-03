@@ -20,4 +20,9 @@ public class PropertyMgr {
         if (props == null) return 0;
         return Integer.parseInt(String.valueOf(props.get(key)));
     }
+
+    public static String getOfString(String key) {
+        if (props == null) return null;
+        return String.valueOf(props.get(key));
+    }
 }

@@ -125,7 +125,7 @@ public class TankFrame extends Frame {
                     bd = false;
                     break;
                 case KeyEvent.VK_CONTROL:
-                    myTank.fire();
+                    myTank.fire(FourDirFireStrategy.getInstance());
                     break;
                 default:
                     break;

@@ -79,7 +79,7 @@ public class Tank {
                 break;
         }
 
-        if (this.group == Group.BAD && random.nextInt(100) > 95) this.fire();
+        if (this.group == Group.BAD && random.nextInt(100) > 95) this.fire(DefaultFireStrategy.getInstance());
         if (this.group == Group.BAD && random.nextInt(100) > 95) randomDir();
 
         boundsCheck();
@@ -100,10 +100,8 @@ public class Tank {
         this.dir = Dir.values()[random.nextInt(4)];
     }
 
-    public void fire() {
-        int bx = this.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
-        int by = this.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
-        tf.bulletList.add(new Bullet(bx, by, this.dir, this.tf, this.group));
+    public void fire(FireStrategy fireStrategy) {
+        fireStrategy.fire(this);
     }
 
     public void die() {
@@ -148,5 +146,13 @@ public class Tank {
 
     public void setGroup(Group group) {
         this.group = group;
+    }
+
+    public TankFrame getTf() {
+        return tf;
+    }
+
+    public void setTf(TankFrame tf) {
+        this.tf = tf;
     }
 }
