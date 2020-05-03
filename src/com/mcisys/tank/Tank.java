@@ -11,7 +11,7 @@ public class Tank {
 
     private int x, y;
     private Dir dir = Dir.DOWN;
-    private TankFrame tf;
+    private GameModel gm;
     private Group group = Group.GOOD;
 
     Rectangle rect = new Rectangle();
@@ -21,12 +21,12 @@ public class Tank {
     private boolean moving = true;
     private boolean living = true;
 
-    public Tank(int x, int y, Dir dir, TankFrame tf, Group group) {
+    public Tank(int x, int y, Dir dir, GameModel gm, Group group) {
         super();
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.tf = tf;
+        this.gm = gm;
         this.group = group;
 
         rect.x = this.x;
@@ -38,7 +38,7 @@ public class Tank {
     public void paint(Graphics g) {
         if (!living) {
             if (this.group == Group.BAD) {
-                tf.tanks.remove(this);
+                gm.tanks.remove(this);
             }
         }
         switch (dir) {
@@ -148,11 +148,11 @@ public class Tank {
         this.group = group;
     }
 
-    public TankFrame getTf() {
-        return tf;
+    public GameModel getGm() {
+        return gm;
     }
 
-    public void setTf(TankFrame tf) {
-        this.tf = tf;
+    public void setGm(GameModel gm) {
+        this.gm = gm;
     }
 }
