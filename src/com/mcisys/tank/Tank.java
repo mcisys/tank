@@ -1,15 +1,19 @@
 package com.mcisys.tank;
 
+import com.mcisys.tank.strategy.DefaultFireStrategy;
+import com.mcisys.tank.strategy.FireStrategy;
+
 import java.awt.*;
 import java.util.Random;
 
-public class Tank {
+public class Tank extends GameObject {
 
     public static final int WIDTH = ResourceMgr.goodTankD.getWidth();
     public static final int HEIGHT = ResourceMgr.goodTankD.getHeight();
     private Random random = new Random();
 
     private int x, y;
+    private int oldX, oldY;
     private Dir dir = Dir.DOWN;
     private GameModel gm;
     private Group group = Group.GOOD;
@@ -38,7 +42,7 @@ public class Tank {
     public void paint(Graphics g) {
         if (!living) {
             if (this.group == Group.BAD) {
-                gm.tanks.remove(this);
+                gm.remove(this);
             }
         }
         switch (dir) {
@@ -61,6 +65,8 @@ public class Tank {
     }
 
     private void move() {
+        oldX = x;
+        oldY = y;
         if (!moving) return;
         switch (dir) {
             case UP:
@@ -154,5 +160,20 @@ public class Tank {
 
     public void setGm(GameModel gm) {
         this.gm = gm;
+    }
+
+    public Rectangle getRect() {
+        return rect;
+    }
+
+    public void goBack() {
+        this.x = oldX;
+        this.y = oldY;
+    }
+
+    public void exchangeDir(Tank tank) {
+        Dir tempDir = this.dir;
+        this.dir = tank.dir;
+        tank.dir = tempDir;
     }
 }

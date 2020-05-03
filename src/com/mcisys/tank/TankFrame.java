@@ -1,5 +1,7 @@
 package com.mcisys.tank;
 
+import com.mcisys.tank.strategy.FourDirFireStrategy;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;

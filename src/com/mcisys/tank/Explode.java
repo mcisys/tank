@@ -2,7 +2,7 @@ package com.mcisys.tank;
 
 import java.awt.*;
 
-public class Explode {
+public class Explode extends GameObject {
 
     public static int WIDTH = ResourceMgr.explodes[0].getWidth();
     public static int HEIGHT = ResourceMgr.explodes[0].getHeight();
@@ -23,7 +23,7 @@ public class Explode {
         g.drawImage(ResourceMgr.explodes[step++], x, y, null);
 
         if (step >= ResourceMgr.explodes.length) {
-            gm.explodeList.remove(this);
+            gm.remove(this);
         }
     }
 }

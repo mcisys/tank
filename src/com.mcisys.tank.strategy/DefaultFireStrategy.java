@@ -1,4 +1,7 @@
-package com.mcisys.tank;
+package com.mcisys.tank.strategy;
+
+import com.mcisys.tank.Bullet;
+import com.mcisys.tank.Tank;
 
 public class DefaultFireStrategy implements FireStrategy {
 

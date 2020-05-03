@@ -1,4 +1,8 @@
-package com.mcisys.tank;
+package com.mcisys.tank.strategy;
+
+import com.mcisys.tank.Bullet;
+import com.mcisys.tank.Dir;
+import com.mcisys.tank.Tank;
 
 public class FourDirFireStrategy implements FireStrategy {
 

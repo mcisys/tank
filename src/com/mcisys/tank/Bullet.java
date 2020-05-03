@@ -2,7 +2,7 @@ package com.mcisys.tank;
 
 import java.awt.*;
 
-public class Bullet {
+public class Bullet extends GameObject {
 
     private static final int SPEED = PropertyMgr.get("bulletSpeed");
     public static final int WIDTH = ResourceMgr.bulletD.getWidth();
@@ -29,12 +29,12 @@ public class Bullet {
         rect.width = WIDTH;
         rect.height = HEIGHT;
 
-        gm.bulletList.add(this);
+        gm.add(this);
     }
 
     public void paint(Graphics g) {
         if (!living) {
-            gm.bulletList.remove(this);
+            gm.remove(this);
         }
         switch (dir) {
             case LEFT:
@@ -81,18 +81,7 @@ public class Bullet {
         if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) living = false;
     }
 
-    public void collideWith(Tank tank) {
-        if (this.group == tank.getGroup()) return;
-        if (this.rect.intersects(tank.rect)) {
-            tank.die();
-            this.die();
-            int ex = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
-            int ey = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-            gm.explodeList.add(new Explode(ex, ey, gm));
-        }
-    }
-
-    private void die() {
+    public void die() {
         this.living = false;
     }
 
@@ -102,5 +91,13 @@ public class Bullet {
 
     public void setGroup(Group group) {
         this.group = group;
+    }
+
+    public Rectangle getRect() {
+        return rect;
+    }
+
+    public GameModel getGm() {
+        return gm;
     }
 }
