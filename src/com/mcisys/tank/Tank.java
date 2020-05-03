@@ -1,11 +1,9 @@
 package com.mcisys.tank;
 
-import com.mcisys.tank.abstractfactory.BaseTank;
-
 import java.awt.*;
 import java.util.Random;
 
-public class Tank extends BaseTank {
+public class Tank {
 
     public static final int WIDTH = ResourceMgr.goodTankD.getWidth();
     public static final int HEIGHT = ResourceMgr.goodTankD.getHeight();
@@ -13,8 +11,10 @@ public class Tank extends BaseTank {
 
     private int x, y;
     private Dir dir = Dir.DOWN;
-    public TankFrame tf;
+    private TankFrame tf;
     private Group group = Group.GOOD;
+
+    Rectangle rect = new Rectangle();
 
     private static final int SPEED = PropertyMgr.get("tankSpeed");
 
@@ -79,7 +79,7 @@ public class Tank extends BaseTank {
                 break;
         }
 
-        if (this.group == Group.BAD && random.nextInt(100) > 95) this.fire();
+        if (this.group == Group.BAD && random.nextInt(100) > 95) this.fire(DefaultFireStrategy.getInstance());
         if (this.group == Group.BAD && random.nextInt(100) > 95) randomDir();
 
         boundsCheck();
@@ -100,14 +100,8 @@ public class Tank extends BaseTank {
         this.dir = Dir.values()[random.nextInt(4)];
     }
 
-    public void fire() {
-        int bx = this.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
-        int by = this.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
-
-        Dir[] dirs = Dir.values();
-        for (Dir dir : dirs) {
-            this.tf.gf.createBullet(bx, by, dir, this.tf, this.group);
-        }
+    public void fire(FireStrategy fireStrategy) {
+        fireStrategy.fire(this);
     }
 
     public void die() {
