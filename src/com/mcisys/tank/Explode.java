@@ -1,8 +1,10 @@
 package com.mcisys.tank;
 
+import com.mcisys.tank.abstractfactory.BaseExplode;
+
 import java.awt.*;
 
-public class Explode {
+public class Explode extends BaseExplode {
 
     public static int WIDTH = ResourceMgr.explodes[0].getWidth();
     public static int HEIGHT = ResourceMgr.explodes[0].getHeight();
@@ -19,6 +21,7 @@ public class Explode {
         this.tf = tf;
     }
 
+    @Override
     public void paint(Graphics g) {
         g.drawImage(ResourceMgr.explodes[step++], x, y, null);
 

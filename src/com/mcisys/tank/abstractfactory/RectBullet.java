@@ -1,11 +1,10 @@
-package com.mcisys.tank;
+package com.mcisys.tank.abstractfactory;
 
-import com.mcisys.tank.abstractfactory.BaseBullet;
-import com.mcisys.tank.abstractfactory.BaseTank;
+import com.mcisys.tank.*;
 
 import java.awt.*;
 
-public class Bullet extends BaseBullet {
+public class RectBullet extends BaseBullet {
 
     private static final int SPEED = PropertyMgr.get("bulletSpeed");
     public static final int WIDTH = ResourceMgr.bulletD.getWidth();
@@ -20,7 +19,7 @@ public class Bullet extends BaseBullet {
 
     private boolean living = true;
 
-    public Bullet(int x, int y, Dir dir, TankFrame tf, Group group) {
+    public RectBullet(int x, int y, Dir dir, TankFrame tf, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -35,26 +34,31 @@ public class Bullet extends BaseBullet {
         tf.bulletList.add(this);
     }
 
+    @Override
     public void paint(Graphics g) {
         if (!living) {
             tf.bulletList.remove(this);
         }
-        switch (dir) {
-            case LEFT:
-                g.drawImage(ResourceMgr.bulletL, x, y, null);
-                break;
-            case RIGHT:
-                g.drawImage(ResourceMgr.bulletR, x, y, null);
-                break;
-            case DOWN:
-                g.drawImage(ResourceMgr.bulletD, x, y, null);
-                break;
-            case UP:
-                g.drawImage(ResourceMgr.bulletU, x, y, null);
-                break;
-            default:
-                break;
-        }
+//        switch (dir) {
+//            case LEFT:
+//                g.drawImage(ResourceMgr.bulletL, x, y, null);
+//                break;
+//            case RIGHT:
+//                g.drawImage(ResourceMgr.bulletR, x, y, null);
+//                break;
+//            case DOWN:
+//                g.drawImage(ResourceMgr.bulletD, x, y, null);
+//                break;
+//            case UP:
+//                g.drawImage(ResourceMgr.bulletU, x, y, null);
+//                break;
+//            default:
+//                break;
+//        }
+        Color color = g.getColor();
+        g.setColor(Color.YELLOW);
+        g.fillRect(x, y, 20, 20);
+        g.setColor(color);
 
         move();
     }
