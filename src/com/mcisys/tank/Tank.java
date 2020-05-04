@@ -12,7 +12,6 @@ public class Tank extends GameObject {
     public static final int HEIGHT = ResourceMgr.goodTankD.getHeight();
     private Random random = new Random();
 
-    private int x, y;
     private int oldX, oldY;
     private Dir dir = Dir.DOWN;
     private Group group = Group.GOOD;
@@ -62,6 +61,16 @@ public class Tank extends GameObject {
                 break;
         }
         move();
+    }
+
+    @Override
+    public int getWidth() {
+        return WIDTH;
+    }
+
+    @Override
+    public int getHeight() {
+        return HEIGHT;
     }
 
     private void move() {
