@@ -15,7 +15,6 @@ public class Tank extends GameObject {
     private int x, y;
     private int oldX, oldY;
     private Dir dir = Dir.DOWN;
-    private GameModel gm;
     private Group group = Group.GOOD;
 
     Rectangle rect = new Rectangle();
@@ -25,24 +24,25 @@ public class Tank extends GameObject {
     private boolean moving = true;
     private boolean living = true;
 
-    public Tank(int x, int y, Dir dir, GameModel gm, Group group) {
+    public Tank(int x, int y, Dir dir, Group group) {
         super();
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.gm = gm;
         this.group = group;
 
         rect.x = this.x;
         rect.y = this.y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
+
+        GameModel.getInstance().add(this);
     }
 
     public void paint(Graphics g) {
         if (!living) {
             if (this.group == Group.BAD) {
-                gm.remove(this);
+                GameModel.getInstance().remove(this);
             }
         }
         switch (dir) {
@@ -152,14 +152,6 @@ public class Tank extends GameObject {
 
     public void setGroup(Group group) {
         this.group = group;
-    }
-
-    public GameModel getGm() {
-        return gm;
-    }
-
-    public void setGm(GameModel gm) {
-        this.gm = gm;
     }
 
     public Rectangle getRect() {

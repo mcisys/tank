@@ -12,16 +12,14 @@ public class Bullet extends GameObject {
 
     private int x, y;
     private Dir dir;
-    private GameModel gm;
     private Group group;
 
     private boolean living = true;
 
-    public Bullet(int x, int y, Dir dir, GameModel gm, Group group) {
+    public Bullet(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.gm = gm;
         this.group = group;
 
         rect.x = this.x;
@@ -29,12 +27,12 @@ public class Bullet extends GameObject {
         rect.width = WIDTH;
         rect.height = HEIGHT;
 
-        gm.add(this);
+        GameModel.getInstance().add(this);
     }
 
     public void paint(Graphics g) {
         if (!living) {
-            gm.remove(this);
+            GameModel.getInstance().remove(this);
         }
         switch (dir) {
             case LEFT:
@@ -95,9 +93,5 @@ public class Bullet extends GameObject {
 
     public Rectangle getRect() {
         return rect;
-    }
-
-    public GameModel getGm() {
-        return gm;
     }
 }
