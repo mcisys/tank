@@ -1,9 +1,14 @@
 package com.mcisys.tank;
 
+import com.mcisys.tank.observer.TankFireEvent;
+import com.mcisys.tank.observer.TankFireHandle;
+import com.mcisys.tank.observer.TankFireObserver;
 import com.mcisys.tank.strategy.DefaultFireStrategy;
 import com.mcisys.tank.strategy.FireStrategy;
 
 import java.awt.*;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 public class Tank extends GameObject {
@@ -176,5 +181,14 @@ public class Tank extends GameObject {
         Dir tempDir = this.dir;
         this.dir = tank.dir;
         tank.dir = tempDir;
+    }
+
+    private List<TankFireObserver> fireObserverList = Collections.singletonList(new TankFireHandle());
+
+    public void handleFireKey() {
+        TankFireEvent event = new TankFireEvent(this);
+        for (TankFireObserver o : fireObserverList) {
+            o.actionOnFire(event);
+        }
     }
 }

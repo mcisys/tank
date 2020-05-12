@@ -100,8 +100,11 @@ public class TankFrame extends Frame {
                 case KeyEvent.VK_DOWN:
                     bd = false;
                     break;
-                case KeyEvent.VK_CONTROL:
-                    gm.getMainTank().fire(FourDirFireStrategy.getInstance());
+//                case KeyEvent.VK_CONTROL:
+//                    gm.getMainTank().fire(FourDirFireStrategy.getInstance());
+//                    break;
+                case KeyEvent.VK_CONTROL:  //observer
+                    gm.getMainTank().handleFireKey();
                     break;
                 default:
                     break;
